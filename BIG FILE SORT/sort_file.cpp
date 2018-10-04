@@ -1,5 +1,5 @@
 #include <cstdio>
-
+#include <iostream>
 bool cmp(const char *a, const char *b) {
     const char *c1 = a, *c2 = b;
     while ((*c1 != '\n') && (*c2 != '\n')) {
