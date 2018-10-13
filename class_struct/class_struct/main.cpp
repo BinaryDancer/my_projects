@@ -49,15 +49,14 @@ public:
 
 int main(int argc, const char * argv[]) {
     list *a = new list;
-    a(info("st", "st", 0));
+    a(info("st", "st", 0), NULL);
     string name, sec_name;
     int y;
     int n;
     cin >> n;
     for (int i = 0; i < n; ++i) {
         list *tmp = new list;
-        *tmp(
-        
+        a->next = tmp;
     }
     cout << "Hello, World!\n";
     return 0;
