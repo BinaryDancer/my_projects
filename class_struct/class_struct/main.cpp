@@ -20,13 +20,20 @@ struct info {
         sec_name = s;
         years = y;
     }
+    string get_name() {
+        return name;
+    }
+    string get_sname() {
+        return sec_name;
+    }
+    void put_name(string &nname) {
+        name = nname;
+    }
+    
 };
 class list {
-private:
-    info data;
-    list *next;
 public:
-    list(info d, list *n = NULL) {
+    list (info d = info(), list *n = NULL) {
         data = d;
         next = n;
     }
@@ -34,30 +41,43 @@ public:
         temp->next = this;
         return temp;
     }
-    list* erase() {
-        if (this != NULL) {
-            list *new_head = this->next;
-            delete this;
-            return new_head;
-        }
-        return this;
+    string get_name() {
+        return data.get_name();
     }
-    ~list(){
-        
+    void put_names(string &s) {
+        data.put_name(s);
     }
+    list* get_tonext() {
+        return next;
+    }
+    ~list() {
+    }
+private:
+    info data;
+    list *next;
 };
 
-int main(int argc, const char * argv[]) {
-    list *a = new list;
-    a(info("st", "st", 0), NULL);
+int main(int argc, const char *argv[]) {
+    list *a = new list(info("st", "st", 0), NULL);
     string name, sec_name;
-    int y;
     int n;
     cin >> n;
     for (int i = 0; i < n; ++i) {
-        list *tmp = new list;
-        a->next = tmp;
+        list *tmp = new list();
+        a = a->insert(tmp);
+        string temp = "";
+        for (int j = 0; j <= i; ++j){
+            temp = temp + "*";
+        }
+        a->put_names(temp);
     }
-    cout << "Hello, World!\n";
+    for (int i = 0; i < n; ++i) {
+        cout << i << " " << a->get_name() << endl;
+        list* ne = a->get_tonext();
+        delete a;
+        a = ne;
+    }
+    cout << a->get_name() << endl;
+    delete a;
     return 0;
 }
