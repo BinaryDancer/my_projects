@@ -37,14 +37,18 @@ int traverse(const char *dir, const char *name_dir)
         return 1;
     }
     while ((dd = readdir(d))) {
-        if (dd->d_name[0] != '.'){
+        if (strcmp(dd->d_name, ".") && strcmp(dd->d_name, "..")) {
             int slen = snprintf(path, sizeof(path), "%s/%s", dir, dd->d_name);
             if (slen + 1 <= sizeof(path)) {
                 struct stat info;
                 if (lstat(path, &info) == 0){
                     if (S_ISDIR(info.st_mode)) {
                         if (count == all) {
-                            v = realloc(v, (all *= 2) * sizeof(*v));
+                            char **tmp = realloc(v, (all *= 2) * sizeof(*v));
+                            if (tmp == NULL) {
+                                return 1;
+                            }
+                            v = tmp;
                         }
                         v[count++] = strdup(dd->d_name);
                     }
@@ -58,7 +62,9 @@ int traverse(const char *dir, const char *name_dir)
     }
     for (size_t i = 0; i < count; ++i) {
         snprintf(path, sizeof(path), "%s/%s", dir, v[i]);
-        traverse(path, v[i]);
+        if (traverse(path, v[i])){
+            return 1;
+        }
         free(v[i]);
     }
     if (name_dir != NULL) {
@@ -73,6 +79,5 @@ int main(int argc, char *argv[]) {
     if (argv[1][len - 1] == '/' && argv[1][len] != '\0'){
         argv[1][len - 1] = '\0';
     }
-    traverse(argv[1], NULL);
-    return 0;
+    return traverse(argv[1], NULL);
 }
