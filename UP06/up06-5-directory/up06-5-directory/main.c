@@ -23,30 +23,30 @@ int traverse(const char *dir)
 {
     DIR *d = opendir(dir);
     if (d == NULL) {
-        return 1;
+        return 0;
     }
     char path[PATH_MAX];
     struct dirent *dd;
     int count = 0;
-    int all = 2;
+    int all = 1;
     char **v = calloc(all, sizeof(*v));
     if (v == NULL){
         return 1;
     }
     while ((dd = readdir(d))) {
-        if (!strcmp(dd->d_name, ".") || !strcmp(dd->d_name, ".."))
-            continue;
-        int slen = snprintf(path, sizeof(path), "%s/%s", dir, dd->d_name);
-        if (slen + 1 > sizeof(path)) {
-            continue;
-        }
-        struct stat info;
-        if (lstat(path, &info) < 0) continue;
-        if (S_ISDIR(info.st_mode)) {
-            if (count == all) {
-                v = realloc(v, (all *= 2) * sizeof(*v));
+        if (dd->d_name[0] != '.'){
+            int slen = snprintf(path, sizeof(path), "%s/%s", dir, dd->d_name);
+            if (slen + 1 <= sizeof(path)) {
+                struct stat info;
+                if (lstat(path, &info) == 0){
+                    if (S_ISDIR(info.st_mode)) {
+                        if (count == all) {
+                            v = realloc(v, (all *= 2) * sizeof(*v));
+                        }
+                        v[count++] = strdup(dd->d_name);
+                    }
+                }
             }
-            v[count++] = strdup(dd->d_name);
         }
     }
     closedir(d);
