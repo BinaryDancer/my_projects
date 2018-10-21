@@ -19,11 +19,14 @@
 int compare(const void * x1, const void * x2) {
     return (strcasecmp(*(char**)x1, *(char**)x2));
 }
-int traverse(const char *dir)
+int traverse(const char *dir, const char *name_dir)
 {
     DIR *d = opendir(dir);
     if (d == NULL) {
         return 0;
+    }
+    if (name_dir != NULL) {
+        printf("cd %s\n", name_dir);
     }
     char path[PATH_MAX];
     struct dirent *dd;
@@ -53,8 +56,7 @@ int traverse(const char *dir)
     qsort(v, count, sizeof(*v), compare);
     for (size_t i = 0; i < count; ++i) {
         snprintf(path, sizeof(path), "%s/%s", dir, v[i]);
-        printf("cd %s\n",v[i]);
-        traverse(path);
+        traverse(path, v[i]);
         printf("cd ..\n");
         free(v[i]);
     }
@@ -67,6 +69,6 @@ int main(int argc, char *argv[]) {
     if (argv[1][len - 1] == '/'){
         argv[1][len - 1] = '\0';
     }
-    traverse(argv[1]);
+    traverse(argv[1], NULL);
     return 0;
 }
