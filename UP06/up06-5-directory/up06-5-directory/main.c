@@ -57,8 +57,10 @@ int traverse(const char *dir, const char *name_dir)
     for (size_t i = 0; i < count; ++i) {
         snprintf(path, sizeof(path), "%s/%s", dir, v[i]);
         traverse(path, v[i]);
-        printf("cd ..\n");
         free(v[i]);
+    }
+    if (name_dir != NULL) {
+        printf("cd ..\n");
     }
     free(v);
     return 0;
