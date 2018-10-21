@@ -53,7 +53,9 @@ int traverse(const char *dir, const char *name_dir)
         }
     }
     closedir(d);
-    qsort(v, count, sizeof(*v), compare);
+    if (count > 0) {
+        qsort(v, count, sizeof(*v), compare);
+    }
     for (size_t i = 0; i < count; ++i) {
         snprintf(path, sizeof(path), "%s/%s", dir, v[i]);
         traverse(path, v[i]);
@@ -67,7 +69,7 @@ int traverse(const char *dir, const char *name_dir)
 }
 
 int main(int argc, char *argv[]) {
-    ssize_t len = strlen(argv[1]);
+    size_t len = strlen(argv[1]);
     if (argv[1][len - 1] == '/' && argv[1][len] != '\0'){
         argv[1][len - 1] = '\0';
     }
