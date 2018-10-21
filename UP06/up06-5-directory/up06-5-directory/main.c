@@ -62,8 +62,11 @@ int traverse(const char *dir)
     return 0;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
+    ssize_t len = strlen(argv[1]);
+    if (argv[1][len - 1] == '/'){
+        argv[1][len - 1] = '\0';
+    }
     traverse(argv[1]);
     return 0;
 }
