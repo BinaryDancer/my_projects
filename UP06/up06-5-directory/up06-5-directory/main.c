@@ -65,4 +65,5 @@ int traverse(const char *dir)
 int main(int argc, char *argv[])
 {
     traverse(argv[1]);
+    return 0;
 }
