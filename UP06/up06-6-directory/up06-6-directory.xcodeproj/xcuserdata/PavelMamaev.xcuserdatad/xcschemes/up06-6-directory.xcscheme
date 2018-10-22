@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "45237057217CF12E00849807"
-               BuildableName = "up06-5-directory"
-               BlueprintName = "up06-5-directory"
-               ReferencedContainer = "container:up06-5-directory.xcodeproj">
+               BlueprintIdentifier = "4523706A217D2DCF00849807"
+               BuildableName = "up06-6-directory"
+               BlueprintName = "up06-6-directory"
+               ReferencedContainer = "container:up06-6-directory.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45237057217CF12E00849807"
-            BuildableName = "up06-5-directory"
-            BlueprintName = "up06-5-directory"
-            ReferencedContainer = "container:up06-5-directory.xcodeproj">
+            BlueprintIdentifier = "4523706A217D2DCF00849807"
+            BuildableName = "up06-6-directory"
+            BlueprintName = "up06-6-directory"
+            ReferencedContainer = "container:up06-6-directory.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45237057217CF12E00849807"
-            BuildableName = "up06-5-directory"
-            BlueprintName = "up06-5-directory"
-            ReferencedContainer = "container:up06-5-directory.xcodeproj">
+            BlueprintIdentifier = "4523706A217D2DCF00849807"
+            BuildableName = "up06-6-directory"
+            BlueprintName = "up06-6-directory"
+            ReferencedContainer = "container:up06-6-directory.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -80,10 +80,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45237057217CF12E00849807"
-            BuildableName = "up06-5-directory"
-            BlueprintName = "up06-5-directory"
-            ReferencedContainer = "container:up06-5-directory.xcodeproj">
+            BlueprintIdentifier = "4523706A217D2DCF00849807"
+            BuildableName = "up06-6-directory"
+            BlueprintName = "up06-6-directory"
+            ReferencedContainer = "container:up06-6-directory.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
