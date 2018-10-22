@@ -32,7 +32,7 @@ int traverse(char *dir, const char *name_dir, int len_dir)
     int count = 0;
     int all = 1;
     char **v = calloc(all, sizeof(*v));
-    if (v == NULL){
+    if (v == NULL) {
         return 1;
     }
     while ((dd = readdir(d))) {
@@ -40,7 +40,7 @@ int traverse(char *dir, const char *name_dir, int len_dir)
             int slen = snprintf(&dir[len_dir], PATH_MAX - len_dir, "/%s", dd->d_name);
             if (slen + len_dir + 1 <= PATH_MAX) {
                 struct stat info;
-                if (lstat(dir, &info) == 0){
+                if (lstat(dir, &info) == 0) {
                     if (S_ISDIR(info.st_mode)) {
                         if (count == all) {
                             char **tmp = realloc(v, (all *= 2) * sizeof(*v));
@@ -61,7 +61,7 @@ int traverse(char *dir, const char *name_dir, int len_dir)
     }
     for (size_t i = 0; i < count; ++i) {
         int slen = snprintf(&dir[len_dir], PATH_MAX - len_dir, "/%s", v[i]);
-        if (traverse(dir, v[i], slen + len_dir)){
+        if (traverse(dir, v[i], slen + len_dir)) {
             return 1;
         }
         free(v[i]);
