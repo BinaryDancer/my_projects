@@ -1,2 +1,2 @@
-# my_prodgects
+# my_projects
 my code for university tasks
