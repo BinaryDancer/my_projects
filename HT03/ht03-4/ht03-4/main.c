@@ -9,12 +9,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <math.h>
 enum
 {
     MULT = 1103515245,
     INC = 12345,
     MOD = 0x80000000,
-    MOD2 = 0x7fffffff,
+    MODD = 0x7fffffff,
     NUMBER_OF_LETTERS = 62,
     NUMBERS = 10,
     BIG_LETTERS = 26,
@@ -34,7 +35,7 @@ int main(void) {
         printf("#\n");
         return 0;
     }
-    int begin, end;
+    int end;
     int indx = template[0];
     for (int i = 0; i < NUMBER_OF_LETTERS; ++i){
         if (letters[i] == indx) {
@@ -42,23 +43,25 @@ int main(void) {
             i = NUMBER_OF_LETTERS;
         }
     }
-    begin = (int) (indx++ / (NUMBER_OF_LETTERS * 1.0) * INT_MAX);
+    int begin = (int) ceil((double)indx++ / NUMBER_OF_LETTERS * MOD);
     if (indx == 62) {
-        end = MOD2;
+        end = MODD;
     } else {
-        end = (int) (indx / (NUMBER_OF_LETTERS * 1.0) * INT_MAX);
+        end = (int) ceil((double)indx / NUMBER_OF_LETTERS * MOD);
     }
     int cnt = 0;
     for (int i = begin; i < end; ++i) {
         begin = i;
         int j = 1;
-        begin = ((begin * (long long) MULT) + INC) & (MOD2);
+        begin = ((begin * (long long) MULT) + INC) & (MODD);
         while (template[j]) {
-            char now = letters[(int)(begin / (INT_MAX + 1.0) * NUMBER_OF_LETTERS)];
-            begin = ((begin * (long long) MULT) + INC) & (MOD2);
-            if (template[j] != '.' && template[j] != now) {
-                break;
+            if (template[j] != '.'){
+                char now = letters[(int)((double)begin / MOD * NUMBER_OF_LETTERS)];
+                if (template[j] != now) {
+                    break;
+                }
             }
+            begin = ((begin * (long long) MULT) + INC) & (MODD);
             ++j;
         }
         if (!template[j]) {
@@ -74,8 +77,8 @@ int main(void) {
     } else {
         int j = 0;
         while (template[j]) {
-            char now = letters[(int)(broken / (INT_MAX + 1.0) * NUMBER_OF_LETTERS)];
-            broken = ((broken * (long long) MULT) + INC) & (MOD2);
+            char now = letters[(int)((double)broken / MOD * NUMBER_OF_LETTERS)];
+            broken = ((broken * (long long) MULT) + INC) & (MODD);
             printf("%c", now);
             ++j;
         }
